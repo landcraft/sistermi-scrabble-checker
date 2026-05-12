@@ -41,26 +41,35 @@ The application will be available at `http://localhost:3000`.
 
 ## Running with Docker
 
-You can easily run the entire stack using Docker Compose. The Dockerfile uses a multi-stage build to compile the frontend, fetch the dictionary data, and prepare a minimal production image.
+The easiest way to run the application is using Docker Compose. The provided `Dockerfile` uses a multi-stage build to compile the frontend, fetch dictionary data, and serve the app from a lightweight Alpine image.
 
+### 1. Build and Start Locally
+To build the image for your local architecture and start the container:
 ```bash
-# Build and start the container
-docker-compose up --build -d
+docker compose up --build -d
 ```
 The application will be available at `http://localhost:3000`.
 
-## Deployment
-
-The project is configured with GitHub Actions. On every push to the `main` branch, the CI/CD pipeline will automatically:
-1. Build the Docker image.
-2. Push it to the GitHub Container Registry (`ghcr.io`).
-
-You can then deploy it on any server (e.g., a local NUC) by running:
+### 2. Stop the Application
 ```bash
-docker pull ghcr.io/<your-username>/sistermi-scrabble-checker:latest
-docker run -d -p 3000:3000 --name scrabble-checker --restart unless-stopped ghcr.io/<your-username>/sistermi-scrabble-checker:latest
+docker compose down
 ```
-*(Or use the provided `docker-compose.yml` on your server).*
+
+## Deployment (CI/CD)
+
+This project uses GitHub Actions to automate deployments. On every push to the `main` branch, the pipeline:
+1.  **Builds** a multi-platform image (`linux/amd64` and `linux/arm64`).
+2.  **Pushes** it to the GitHub Container Registry (GHCR).
+
+### Deploying to a Server (e.g., NUC)
+To deploy the pre-built image on a remote server:
+1.  Copy `docker-compose.yml` to your server.
+2.  Run:
+    ```bash
+    docker compose pull
+    docker compose up -d
+    ```
+Because of the multi-platform build, the same command works seamlessly on both Apple Silicon (ARM) and traditional Intel/AMD (x86) servers.
 
 ## API
 

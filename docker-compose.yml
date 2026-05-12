@@ -1,6 +1,7 @@
 services:
   scrabble-checker:
     image: ghcr.io/landcraft/sistermi-scrabble-checker:latest
+    build: .
     container_name: sistermi-scrabble-checker
     restart: unless-stopped
     ports:
