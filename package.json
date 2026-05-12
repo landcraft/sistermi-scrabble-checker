@@ -4,10 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
+    "build:data": "node scripts/fetch_words.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.2.0",
+    "sqlite3": "^5.1.7",
+    "cors": "^2.8.5"
+  },
+  "license": "MIT",
   "type": "commonjs"
 }
