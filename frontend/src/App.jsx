@@ -93,7 +93,7 @@ function App() {
   return (
     <div className={`min-h-screen flex flex-col items-center justify-center transition-colors duration-500 ease-in-out ${bgColorClass} text-white p-4`}>
       
-      <div className="absolute top-6 left-6 right-6 flex justify-between items-center">
+      <div className="absolute top-6 left-6 right-6 flex flex-col md:flex-row justify-between items-center gap-4">
         <h1 className="text-xl md:text-2xl font-bold tracking-tight opacity-90">
           Sistermi's Scrabble Checker
         </h1>
@@ -103,25 +103,27 @@ function App() {
             onClick={() => { setDictionary('US'); setIsValid(null); }}
             className={`px-4 py-2 rounded-md text-sm font-semibold transition-all ${dictionary === 'US' ? 'bg-white text-slate-900 shadow-sm' : 'text-white/70 hover:text-white'}`}
           >
-            US (NWL)
+            US English
           </button>
           <button 
             onClick={() => { setDictionary('UK'); setIsValid(null); }}
             className={`px-4 py-2 rounded-md text-sm font-semibold transition-all ${dictionary === 'UK' ? 'bg-white text-slate-900 shadow-sm' : 'text-white/70 hover:text-white'}`}
           >
-            UK (CSW)
+            UK English
           </button>
         </div>
       </div>
 
       <div className="w-full max-w-3xl flex flex-col items-center">
+        <label className="text-sm md:text-base font-bold tracking-[0.2em] text-white/50 mb-4 uppercase">
+          Type a word
+        </label>
         <input
           ref={inputRef}
           type="text"
           value={word}
           onChange={handleInputChange}
-          placeholder="TYPE A WORD..."
-          className="w-full text-5xl md:text-8xl font-black text-center bg-transparent border-b-4 border-white/20 focus:border-white outline-none py-4 placeholder-white/30 uppercase tracking-widest transition-colors"
+          className="w-full text-5xl md:text-8xl font-black text-center bg-transparent border-b-4 border-white/20 focus:border-white outline-none py-4 uppercase tracking-widest transition-colors"
           spellCheck="false"
           autoComplete="off"
         />
@@ -146,6 +148,10 @@ function App() {
           )}
         </div>
       </div>
+
+      <footer className="absolute bottom-6 opacity-40 text-sm font-medium tracking-wide">
+        Built with love by Lanre
+      </footer>
 
     </div>
   );
