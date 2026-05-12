@@ -17,7 +17,7 @@ function useDebounce(value, delay) {
 function App() {
   const [word, setWord] = useState('');
   const [dictionary, setDictionary] = useState(() => {
-    return localStorage.getItem('scrabble-dictionary') || 'US';
+    return localStorage.getItem('scrabble-dictionary') || 'UK';
   });
   const [isValid, setIsValid] = useState(null); // null = typing/empty, true = valid, false = invalid
   const [isChecking, setIsChecking] = useState(false);
