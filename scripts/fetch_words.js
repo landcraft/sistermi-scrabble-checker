@@ -12,8 +12,8 @@ if (!fs.existsSync(DATA_DIR)) {
 }
 
 const DICTIONARIES = {
-  US: 'https://raw.githubusercontent.com/jesstess/Scrabble/master/scrabble/twl06.txt',
-  UK: 'https://raw.githubusercontent.com/jesstess/Scrabble/master/scrabble/sowpods.txt'
+  US: 'https://raw.githubusercontent.com/pbevin/lexicon/master/twl06.txt',
+  UK: 'https://raw.githubusercontent.com/pbevin/lexicon/master/sowpods.txt'
 };
 
 const downloadFile = (url) => {
