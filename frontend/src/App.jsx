@@ -86,14 +86,28 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    if (isValid === true) {
+      // Double tap haptic for valid word
+      if ('vibrate' in navigator) {
+        navigator.vibrate([50, 30, 50]);
+      }
+    } else if (isValid === false && debouncedWord.length >= 2) {
+      // Single thud haptic for invalid word
+      if ('vibrate' in navigator) {
+        navigator.vibrate(100);
+      }
+    }
+  }, [isValid, debouncedWord]);
+
   let bgColorClass = 'bg-slate-900';
   if (isValid === true) bgColorClass = 'bg-emerald-600';
   if (isValid === false && debouncedWord.length >= 2) bgColorClass = 'bg-rose-600';
 
   return (
-    <div className={`min-h-screen flex flex-col items-center justify-center transition-colors duration-500 ease-in-out ${bgColorClass} text-white p-4`}>
+    <div className={`fixed inset-0 flex flex-col items-center justify-center transition-colors duration-500 ease-in-out ${bgColorClass} text-white p-4 pt-safe pb-safe`}>
       
-      <div className="absolute top-6 left-6 right-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="absolute top-0 left-0 right-0 p-6 pt-safe flex flex-col md:flex-row justify-between items-center gap-4">
         <h1 className="text-xl md:text-2xl font-bold tracking-tight opacity-90">
           Sistermi's Scrabble Checker
         </h1>
@@ -126,6 +140,7 @@ function App() {
           className="w-full text-5xl md:text-8xl font-black text-center bg-transparent border-b-4 border-white/20 focus:border-white outline-none py-4 uppercase tracking-widest transition-colors"
           spellCheck="false"
           autoComplete="off"
+          inputMode="text"
         />
         
         <div className="h-24 mt-8 flex items-center justify-center">
@@ -149,7 +164,7 @@ function App() {
         </div>
       </div>
 
-      <footer className="absolute bottom-6 opacity-40 text-sm font-medium tracking-wide">
+      <footer className="absolute bottom-0 pb-safe opacity-40 text-sm font-medium tracking-wide mb-6">
         Built with love by Lanre
       </footer>
 
